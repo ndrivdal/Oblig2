@@ -57,7 +57,7 @@ public class Oppgave1 {
                 System.out.print(i + " + ");
             } else {
                 //Gjør at den ikke skriver " + " på siste tallet
-                System.out.print(i);
+                System.out.print(i + " ");
             }
             if (telleTilTi == 10) {
                 System.out.println();

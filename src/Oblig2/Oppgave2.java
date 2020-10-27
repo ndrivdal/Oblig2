@@ -10,12 +10,12 @@ class Tallspill {
     }
 
 
-    public void visMelding(String melding){
+    public void visMelding(String melding) {
         // Viser parameterens innhold i en meldingsboks.
         showMessageDialog(null, melding);
     }
 
-    private void forLite(int tall){
+    private void forLite(int tall) {
     /* Viser melding om at parameterens verdi er for
        lite tall og ber spilleren prøve igjen. */
         String melding = tall + " er for lite!\nPrøv igjen!";
@@ -47,21 +47,20 @@ class Tallspill {
         int input = 0;
 
         while (input != fasit) {
+            antallForsok++;
+
             try {
                 input = Integer.parseInt(showInputDialog("Jeg tenker på et tall mellom 0 og 200.\nPrøv å gjette " + "tallet"));
             } catch (Exception e) {
-                input = 0;
+                continue;
             }
 
-            if (input == fasit) {
-                antallForsok++;
-                avsluttRunde(antallForsok, input);
-            } else if (input < fasit) {
-                antallForsok++;
+            if (input < fasit) {
                 forLite(input);
-            } else {
-                antallForsok++;
+            } else if (input > fasit) {
                 forStort(input);
+            } else /* (input == fasit) */{
+                avsluttRunde(antallForsok, input);
             }
         }
     }

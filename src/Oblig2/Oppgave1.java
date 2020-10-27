@@ -16,31 +16,23 @@ public class Oppgave1 {
         int ovreGrense = 0;
 
         //Sjekker om nedre grense og øvre grense er tall, og deretter om øvre grense er større enn nedre.
-        int gyldigSjekk = 0;
-        while (gyldigSjekk != 3) {
-            gyldigSjekk = 0;
+        boolean gyldigInput = false;
+        while (!gyldigInput) {
             innNedreGrense = showInputDialog("Skriv inn nedre grense");
             innOvreGrense = showInputDialog("Skriv inn øvre grense");
+
             try {
                 nedreGrense = Integer.parseInt(innNedreGrense);
-                gyldigSjekk += 1;
-            } catch (Exception e) {
-                showMessageDialog(null, "Nedre grense er ikke et tall.\nSkriv inn ny verdi");
-            }
-
-            try {
                 ovreGrense = Integer.parseInt(innOvreGrense);
-                gyldigSjekk += 1;
-            } catch (Exception e) {
-                showMessageDialog(null, "Øvre grense er ikke et tall.\nSkriv inn ny verdi");
-            }
 
-            if (nedreGrense < ovreGrense) {
-                gyldigSjekk += 1;
-            } else if (gyldigSjekk == 2){
-                //Bruker else-if (gyldigSjekk == 2) sånn at den ikke kjører hvis input ikke er tall.
-                //(For å forhindre unødvendig mange meldingsbokser)
-                showMessageDialog(null, "Øvre grense er mindre eller lik nedre grense.\nSkriv inn ny verdi.");
+                if (nedreGrense < ovreGrense) {
+                    gyldigInput = true;
+                } else {
+                    showMessageDialog(null, "Øvre grense er mindre eller lik nedre grense.\nSkriv inn ny verdi.");
+                }
+
+            } catch (Exception e) {
+                showMessageDialog(null, "Du skrev inn et ugyldig tall.\nSkriv inn ny verdi.");
             }
         }
 
@@ -48,20 +40,17 @@ public class Oppgave1 {
         //beregne nevnte sum og summen skal så skrive den ut som en sum.
         //Legg inn et linjeskift for hvert 10. tall i summen.
 
-        int telleTilTi = 0;
         int sum = 0;
         for (int i = nedreGrense; i <= ovreGrense; i++) {
             sum += i;
-            telleTilTi ++;
             if (i < ovreGrense) {
                 System.out.print(i + " + ");
             } else {
                 //Gjør at den ikke skriver " + " på siste tallet
                 System.out.print(i + " ");
             }
-            if (telleTilTi == 10) {
+            if (i % 10 == 0) {
                 System.out.println();
-                telleTilTi = 0;
             }
         }
         System.out.print("= " + sum);
